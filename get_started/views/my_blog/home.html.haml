@@ -1,0 +1,22 @@
+= exo_block_tag(:tag_line) do
+  %h1 My super blog tag line
+.row
+  .columns.large-8
+    - tick.site.resource(:post).items.published.desc(:created_at).each do |p|
+      - long_post = !post.text.value.blank?
+      %article
+        %h2
+          - if long_post
+            = link_to p.name, "/post/#{p.slug_id}"
+          - else
+            = p.name
+        = raw post.short_intro.value
+        - if long_post
+          %p= link_to 'Read More' "/post/#{p.slug_id}"
+  .columns.large-4
+    = exo_block_tag(:side_description) do
+      %h3 What is about ?
+      %p
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Praesent aliquam metus eget lorem euismod consequat.
+        Integer interdum velit id ligula tincidunt vestibulum. 
